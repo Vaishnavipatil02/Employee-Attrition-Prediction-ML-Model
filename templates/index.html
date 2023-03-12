@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Attrition Prediction</title>
+    <style>
+        body{
+            background: seashell;
+            padding: 80px;
+            padding-top: 20px;   
+        } 
+
+        h1{
+            text-align: center;
+            text-transform: uppercase;
+            font-family: 'Times New Roman', Times, serif;
+            
+        }
+          
+
+        h3{
+            text-align: center;
+            text-transform: uppercase;
+            font-family: 'Times New Roman', Times, serif;
+            
+        }
+          
+        .empInfo{
+            font-family: 'Times New Roman', Times, serif;
+            
+        }
+
+        input[type=number]{
+            width: 100%;
+            padding: 12px 20px;
+            margin: 8px 0;
+            display: inline-block;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        input[type=text], select{
+            width: 100%;
+            padding: 12px 20px;
+            margin: 8px 0;
+            display: inline-block;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        button[type=submit] {
+            width: 100%;
+            background-color: #4CAF50;
+            color: white;
+            padding: 14px 20px;
+            margin: 8px 0;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }       
+
+        input[type=submit]:hover {
+          background-color: #45a049;
+        }        
+
+    </style>
+
+    
+</head>
+<body>
+    
+    <div class = "empInfo">
+        <h1>Employee Attrition Prediction System</h1>
+        <form action="{{ url_for('predict')}}" method="POST" autocomplete="on">
+
+        <label >Age</label>:
+        <input type="number"  name="Age" placeholder="Select between 18 to 80 years" required min="18" max="80">
+        <br>
+        <br> 
+
+        <label>BusinessTravel</label> :
+        <select id ="BusinessTravel" name="BusinessTravel">
+          <option value=""disabled selected>Select Business Travel</option>
+          <option value="1">Rarely</option>
+          <option value="2">Frequently</option>
+          <option value="3">No Travel</option>
+        </select>
+        <br>
+        <br>
+
+        <label>Daily Rate</label> : 
+        <input type="number" name="Daily Rate" placeholder="Select between 100 to 1600" required min="100" max="1600" size="30">
+        <br><br>
+
+        <label>Department</label> :
+        <select id ="Department" name="Department">
+            <option value=""disabled selected>Select Department</option>
+            <option value="1">Research & Development</option>
+            <option value="2">Human Resources</option>
+            <option value="3">Sales</option>
+          </select>
+        <br><br>
+
+        <label>Distance From Home</label> : 
+        <input type="number" name="Distance From Home" placeholder="Select between 1 to 29" required min="1" max="29">
+        <br><br>
+
+        <label>Education</label>:<br> 1.Below College <br>2.College <br>3.Bachelor <br>4.Master <br>5.Doctor 
+        <input type="number" name="Education" placeholder="Select between 1 to 5" required min="1" max="5">
+        <br><br>
+
+        <label>Education Field</label> : 
+        <select id ="Education Field" name="Education Field">
+            <option value=""disabled selected>Select Education Field</option>
+            <option value="1">Life Sciences</option>
+            <option value="2">Medical</option>
+            <option value="3">Marketing</option>
+            <option value="4">Technical Degree</option>
+            <option value="5">Human Resources</option>
+            <option value="6">Other</option>
+        </select>
+        <br><br>
+
+        <label>Environment Satisfaction</label>: <br>1.Low <br>2.Medium <br>3.High <br>4.Very High
+        <input type="number" name="Environment Satisfaction" placeholder="Select between 1 to 4" required min="1" max="4">
+        <br><br>
+
+        <label>Gender</label> :
+        <select id ="Gender" name="Gender">
+            <option value=""disabled selected>Select Gender</option>
+            <option value="1">Male</option>
+            <option value="2">Female</option>
+        </select> 
+        <br><br>
+
+        <label>Hourly Rate</label> : 
+        <input type="number" name="Hourly Rate" placeholder="Select between 30 to 100" required min="30" max="100">
+        <br><br>
+
+        <label>Job Involvement</label>: <br>1.Low <br>2.Medium <br>3.High <br>4.Very High
+        <input type="number" name="Job Involvement" placeholder="Select between 1 to 4" required min="1" max="4">
+        <br><br>
+
+        <label>Job Level</label> : 
+        <input type="number" name="Job Level" placeholder="Select between 1 to 5" required min="1" max="5">
+        <br><br>
+
+        <label>Job Role</label> :
+        <select id ="Job Role" name="Job Role">
+            <option value=""disabled selected>Select Job Role</option>
+            <option value="1">Sales Executive</option>
+            <option value="2">Research Scientist</option>
+            <option value="3">Laboratory Technician</option>
+            <option value="4">Manufacturing Director</option>
+            <option value="5">Healthcare Representative</option>
+            <option value="6">Manager</option>
+            <option value="7">Sales Representative</option>
+            <option value="8">Research Director</option>
+            <option value="9">Human Resource</option>
+          </select>
+        <br><br>
+
+        <label>Job Satisfaction</label> : <br>1.Low <br>2.Medium <br>3.High <br>4.Very High
+        <input type="number" name="Job Satisfaction" placeholder="Select between 1 to 4" required min="1" max="4"><br><br>
+
+        <label>Marital Status</label> :
+        <select id ="Marital Status" name="Marital Status">
+            <option value=""disabled selected>Select Marital Status</option>
+            <option value="1">Married</option>
+            <option value="2">Single</option>
+            <option value="3">Divorced</option>
+          </select>
+        <br><br>
+
+        <label>Monthly Income</label> : 
+        <input type="number" name="Monthly Income" placeholder="Select between 1000 to 20000" required min="1000" max="20000" size="30">
+        <br><br>
+
+        <label>Number of Companies Worked in</label> : 
+        <input type="number" name="Number of Companies Worked in" placeholder="Select between 0 to 9" required min="1" max="9">
+        <br><br>
+
+        <label>Over Time</label> : 
+        <select id ="Over Time" name="Over Time">
+            <option value=""disabled selected>Select Over Time</option>
+            <option value="1">Yes</option>
+            <option value="2">No</option>
+          </select>
+
+        <label>Performance Rating</label>: <br> 1.Low<br> 2.Good<br> 3.Excellent<br> 4.Outstanding
+        <input type="number" name="Performance Rating" placeholder="Select between 1 to 4" required min="1" max="4">
+        <br><br>
+
+        <label>Relationship Satisfaction</label> : <br>1.Low <br>2.Medium <br>3.High <br>4.Very High
+        <input type="number" name="Relationship Satisfaction" placeholder="Select between 1 to 4" required min="1" max="4">
+        <br><br>
+
+        <label>Stock Option Level</label> : 
+        <input type="number" name="Stock Option Level" placeholder="Select between 0 to 3" required min="0" max="3">
+        <br><br>
+
+        <label>Total Working Years</label> : 
+        <input type="number" name="Total Working Years" placeholder="Select between 0 to 40" required min="0" max="40">
+        <br><br>
+
+        <label>Training Times Last Year</label> : 
+        <input type="number" name="Training Times Last Year" placeholder="Select between 0 to 6" required min="0" max="6">
+        <br><br>
+
+        <label>Work Life Balance</label> : <br>1.Bad <br>2.Good <br>3.Better <br>4.Best
+        <input type="number" name="Work Life Balance" placeholder="Select between 1 to 4" required min="1" max="4">
+        <br><br>
+
+        <label>Years At Company</label> : 
+        <input type="number" name="Years At Company" placeholder="Select between 0 to 40" required min="0" max="40">
+        <br><br>
+
+        <label>Years In Current Role</label> : 
+        <input type="number" name="Years In Current Role" placeholder="Select between 0 to 18" required min="0" max="18">
+        <br><br>
+
+        <label>Years Since Last Promotion</label> : 
+        <input type="number" name="Years Since Last Promotion" placeholder="Select between 0 to 15" required min="0" max="15">
+        <br><br>
+
+        <label>Years With Curr Manager</label> : 
+        <input type="number" name="Years With Curr Manager" placeholder="Select between 0 to 17" required min="0" max="17">
+        <br><br>
+
+        <br><button type="submit" class="btn btn-primary btn-block btn-large">Predict</button>
+        </form>
+
+        <br>
+        <br>
+
+        <h3>{{ prediction_text }}</h3>
+    </div>
+
+</body>
+</html>
